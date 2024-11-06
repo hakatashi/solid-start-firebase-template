@@ -1,0 +1,28 @@
+{
+	"name": "solid-start-firebase-template",
+	"type": "module",
+	"scripts": {
+		"dev": "concurrently \"npm run dev:server\" \"npm run dev:firebase\"",
+		"dev:server": "vinxi dev",
+		"dev:firebase": "firebase emulators:start --only firestore,hosting,auth",
+		"build": "vinxi build",
+		"start": "vinxi start",
+		"lint": "biome lint --write",
+		"format": "biome format --write"
+	},
+	"dependencies": {
+		"@solidjs/router": "^0.15.1",
+		"@solidjs/start": "^1.0.10",
+		"concurrently": "^9.1.0",
+		"firebase": "^11.0.1",
+		"solid-firebase": "^0.3.0",
+		"solid-js": "^1.9.2",
+		"vinxi": "^0.4.3"
+	},
+	"engines": {
+		"node": ">=20"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4"
+	}
+}
