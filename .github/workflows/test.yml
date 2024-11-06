@@ -60,6 +60,8 @@ jobs:
 
       - name: Test
         run: npm test
+        env:
+          FIREBASE_TOKEN: "${{ secrets.FIREBASE_TOKEN }}"
 
   deploy_firebase:
     name: Deploy Firebase Configurations
