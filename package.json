@@ -2,14 +2,14 @@
 	"name": "solid-start-firebase-template",
 	"type": "module",
 	"scripts": {
-		"dev": "concurrently \"npm run dev:server\" \"npm run dev:firebase\"",
+		"dev": "concurrently \"npm run dev:server\" \"npm run dev:firebase\" --names server,firebase",
 		"dev:server": "vinxi dev",
 		"dev:firebase": "firebase emulators:start --only firestore,hosting,auth",
 		"build": "vinxi build",
 		"start": "vinxi start",
 		"lint": "biome lint --write",
 		"format": "biome format --write",
-		"test": "concurrently \"npm run dev:firebase\" \"npm run test:vitest\" --kill-others",
+		"test": "concurrently \"npm run dev:firebase\" \"npm run test:vitest\" --names firebase,vitest --kill-others --success first",
 		"test:vitest": "wait-on http-get://localhost:8080 http-get://localhost:5000 && vitest"
 	},
 	"dependencies": {
