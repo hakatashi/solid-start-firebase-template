@@ -1,4 +1,4 @@
-import type {Component} from 'solid-js';
+import {createSignal, type Component, type JSX} from 'solid-js';
 import {auth, Tasks} from '~/lib/firebase';
 import {useAuth, useFirestore} from 'solid-firebase';
 import Collection from '~/lib/Collection';
@@ -9,22 +9,25 @@ import styles from './index.module.css';
 const Index: Component = () => {
 	const tasks = useFirestore(query(Tasks, orderBy('createdAt', 'asc')));
 	const authState = useAuth(auth);
+	const [newTask, setNewTask] = createSignal('');
 
-	const onClickAddTask = async () => {
-		if (!authState.data) {
+	const onSubmitTask: JSX.EventHandler<HTMLFormElement, SubmitEvent> = async (
+		event,
+	) => {
+		event.preventDefault();
+		const form = event.currentTarget;
+
+		if (!(authState.data && form)) {
 			return;
 		}
 
-		const input = document.querySelector('input') as HTMLInputElement;
-		const task = input.value;
-
 		await addDoc(Tasks, {
-			task,
+			task: newTask(),
 			uid: authState.data.uid,
 			createdAt: Timestamp.now(),
 		});
 
-		input.value = '';
+		setNewTask('');
 	};
 
 	return (
@@ -33,14 +36,17 @@ const Index: Component = () => {
 				{(taskData) => <li class={styles.task}>{taskData.task}</li>}
 			</Collection>
 			<li class={styles.addTask}>
-				<input type="text" />
-				<button
-					type="button"
-					onClick={onClickAddTask}
-					disabled={!authState.data}
-				>
-					Add Task
-				</button>
+				<form onSubmit={onSubmitTask}>
+					<input
+						type="text"
+						name="task"
+						value={newTask()}
+						onChange={(event) => setNewTask(event.currentTarget?.value)}
+					/>
+					<button type="submit" disabled={!authState.data}>
+						Add Task
+					</button>
+				</form>
 			</li>
 		</ul>
 	);

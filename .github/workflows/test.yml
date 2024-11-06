@@ -38,10 +38,27 @@ jobs:
       - name: Format
         run: npx biome format
 
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test
+        run: npm test
+
   deploy_firebase:
     name: Deploy Firebase Configurations
 
-    needs: [lint, format]
+    needs: [lint, format, test]
 
     if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' }}
 
@@ -69,7 +86,7 @@ jobs:
   deploy_hosting:
     name: Deploy Firebase Hosting
 
-    needs: [lint, format]
+    needs: [lint, format, test]
 
     if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' }}
 
