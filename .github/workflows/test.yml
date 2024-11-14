@@ -58,10 +58,8 @@ jobs:
       - name: Setup Firebase CLI
         run: npm install -g firebase-tools
 
-      - name: Test
+      - name: Run Test
         run: npm test
-        env:
-          FIREBASE_TOKEN: "${{ secrets.FIREBASE_TOKEN }}"
 
   deploy_firebase:
     name: Deploy Firebase Configurations
