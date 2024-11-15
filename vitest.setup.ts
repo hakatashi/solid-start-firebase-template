@@ -5,7 +5,14 @@ const fetchMock = vi.spyOn(global, 'fetch');
 fetchMock.mockImplementation((...args) => {
 	const [url] = args;
 	if (url === '/__/firebase/init.json') {
-		return originalFetch('http://localhost:5000/__/firebase/init.json');
+		return Promise.resolve(
+			new Response(
+				JSON.stringify({
+					apiKey: 'fakeApiKey',
+					projectId: 'solid-start-firebase-template',
+				}),
+			),
+		);
 	}
 	return originalFetch(...args);
 });
