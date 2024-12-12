@@ -13,7 +13,7 @@
 		"test:vitest": "wait-on http-get://localhost:8080 http-get://localhost:5000 && vitest"
 	},
 	"dependencies": {
-		"@solidjs/router": "^0.15.1",
+		"@solidjs/router": "^0.15.2",
 		"@solidjs/start": "^1.0.10",
 		"concurrently": "^9.1.0",
 		"firebase": "^11.0.2",
