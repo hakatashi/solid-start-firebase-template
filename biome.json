@@ -16,7 +16,7 @@
 		}
 	},
 	"files": {
-		"ignore": ["node_modules", "public", ".output", ".vinxi"]
+		"ignore": ["node_modules", "public", ".output", ".vinxi", "functions/lib"]
 	},
 	"javascript": {
 		"formatter": {
@@ -28,5 +28,17 @@
 		"formatter": {
 			"quoteStyle": "single"
 		}
-	}
+	},
+	"overrides": [
+		{
+			"include": ["functions/**/*.ts"],
+			"linter": {
+				"rules": {
+					"correctness": {
+						"noUndeclaredDependencies": "off"
+					}
+				}
+			}
+		}
+	]
 }
