@@ -2,7 +2,7 @@
 	"name": "functions",
 	"scripts": {
 		"build": "tsc",
-		"build:watch": "tsc --watch",
+		"build:watch": "tsc --watch --preserveWatchOutput",
 		"logs": "firebase functions:log"
 	},
 	"engines": {
