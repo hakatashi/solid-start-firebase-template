@@ -15,14 +15,14 @@
 		"prepare": "husky"
 	},
 	"dependencies": {
-		"@solidjs/router": "^0.15.1",
-		"@solidjs/start": "^1.0.10",
-		"concurrently": "^9.1.0",
-		"firebase": "^11.0.2",
+		"@solidjs/router": "^0.15.3",
+		"@solidjs/start": "^1.0.11",
+		"concurrently": "^9.1.2",
+		"firebase": "^11.2.0",
 		"solid-firebase": "^0.3.0",
-		"solid-js": "^1.9.3",
+		"solid-js": "^1.9.4",
 		"vinxi": "^0.4.3",
-		"vite-plugin-solid": "^2.10.2"
+		"vite-plugin-solid": "^2.11.0"
 	},
 	"engines": {
 		"node": ">=20"
@@ -31,10 +31,10 @@
 		"@biomejs/biome": "^1.9.4",
 		"@solidjs/testing-library": "^0.8.10",
 		"@testing-library/jest-dom": "^6.6.3",
-		"@testing-library/user-event": "^14.5.2",
+		"@testing-library/user-event": "^14.6.1",
 		"husky": "^9.1.7",
-		"jsdom": "^25.0.1",
-		"vitest": "^2.1.5",
-		"wait-on": "^8.0.1"
+		"jsdom": "^26.0.0",
+		"vitest": "^2.1.8",
+		"wait-on": "^8.0.2"
 	}
 }
