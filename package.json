@@ -13,9 +13,9 @@
 		"format": "biome format --write",
 		"fix": "npm run format && npm run lint -- --unsafe",
 		"test": "concurrently \"npm run dev:firebase\" \"npm run test:vitest\" --names firebase,vitest --kill-others --success first",
-		"test:vitest": "wait-on http-get://localhost:8080 http-get://localhost:5000 && vitest",
+		"test:vitest": "wait-on http-get://localhost:8080 http-get://localhost:5000 http-get://localhost:9099 && vitest",
 		"prepare": "husky",
-		"install": "npm --prefix functions install"
+		"install": "cd functions && npm install"
 	},
 	"dependencies": {
 		"@solidjs/router": "^0.15.3",
@@ -37,7 +37,7 @@
 		"@testing-library/user-event": "^14.6.1",
 		"husky": "^9.1.7",
 		"jsdom": "^26.0.0",
-		"vitest": "^2.1.8",
+		"vitest": "^3.0.4",
 		"wait-on": "^8.0.2"
 	}
 }

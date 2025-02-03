@@ -1,8 +1,7 @@
 import {beforeEach, vi} from 'vitest';
 
 const originalFetch = global.fetch;
-const fetchMock = vi.spyOn(global, 'fetch');
-fetchMock.mockImplementation((...args) => {
+const fetchMock = vi.fn<typeof fetch>((...args) => {
 	const [url] = args;
 	if (url === '/__/firebase/init.json') {
 		return Promise.resolve(
@@ -16,6 +15,7 @@ fetchMock.mockImplementation((...args) => {
 	}
 	return originalFetch(...args);
 });
+vi.stubGlobal('fetch', fetchMock);
 
 beforeEach(async () => {
 	// Reset firestore data
