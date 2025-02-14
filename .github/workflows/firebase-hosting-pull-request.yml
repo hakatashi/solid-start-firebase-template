@@ -19,7 +19,7 @@ jobs:
         (github.event_name == 'pull_request_target' && github.actor == 'dependabot[bot]')
       )
     outputs:
-      status: ${{ steps.check.conclusion }}
+      status: ${{ steps.check.outcome }}
     steps:
       - id: check
         name: Check if the PR author has access to the Firebase project
