@@ -40,5 +40,12 @@ export default defineConfig({
 	ssr: false,
 	server: {
 		compatibilityDate: '2024-11-07',
+		esbuild: {
+			options: {
+				supported: {
+					'top-level-await': true,
+				},
+			},
+		},
 	},
 });
