@@ -25,4 +25,6 @@ beforeEach(async () => {
 			method: 'DELETE',
 		},
 	);
+	// Wait a bit for the deletion to complete
+	await new Promise((resolve) => setTimeout(resolve, 100));
 });
