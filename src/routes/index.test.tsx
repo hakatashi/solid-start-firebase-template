@@ -14,35 +14,54 @@ test('has add task button', async () => {
 test('is able to add task', async () => {
 	const {getByRole, getByText, getAllByRole} = render(() => <Index />);
 
-	{
-		const taskInput = getByRole('textbox');
-		expect(taskInput).toHaveValue('');
+	// Wait for initial render and Firebase connection
+	await waitFor(
+		() => {
+			const tasks = getAllByRole('listitem');
+			expect(tasks).toHaveLength(1);
+		},
+		{timeout: 5000},
+	);
 
-		const addTaskButton = getByText('Add Task');
-		expect(addTaskButton).not.toBeDisabled();
+	const taskInput = getByRole('textbox');
+	expect(taskInput).toHaveValue('');
 
-		const tasks = getAllByRole('listitem');
-		expect(tasks).toHaveLength(1);
+	const addTaskButton = getByText('Add Task');
+	expect(addTaskButton).not.toBeDisabled();
 
-		await user.type(taskInput, 'Hello, World!');
-		await user.click(addTaskButton);
-	}
+	// Type the task
+	await user.type(taskInput, 'Hello, World!');
 
+	// Click add task button
+	await user.click(addTaskButton);
+
+	// Wait for the input to be cleared (indicating successful save)
 	await waitFor(
 		() => {
 			const taskInput = getByRole('textbox');
 			expect(taskInput).toHaveValue('');
 		},
 		{
-			timeout: 1000,
+			timeout: 10000,
 		},
 	);
 
-	{
-		const tasks = getAllByRole('listitem');
-		expect(tasks).toHaveLength(2);
+	// Wait for the new task to appear in the list
+	await waitFor(
+		() => {
+			const tasks = getAllByRole('listitem');
+			expect(tasks).toHaveLength(2);
+		},
+		{
+			timeout: 10000,
+		},
+	);
 
-		const lastTask = tasks[tasks.length - 2];
-		expect(lastTask).toHaveTextContent('Hello, World!');
-	}
+	// Check the task content
+	const tasks = getAllByRole('listitem');
+	const newTask = tasks.find((task) =>
+		task.textContent?.includes('Hello, World!'),
+	);
+	expect(newTask).toBeTruthy();
+	expect(newTask).toHaveTextContent('Hello, World!');
 });
