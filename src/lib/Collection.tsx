@@ -34,7 +34,7 @@ const Collection = <T extends DocumentData>(props: Props<T>) => (
 			)}
 		</Match>
 		<Match when={true}>
-			<span class="load-error">Load error occured.</span>
+			<span class="load-error">Load error occurred.</span>
 		</Match>
 	</Switch>
 );
